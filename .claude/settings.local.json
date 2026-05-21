@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(D:/Python/Anaconda/anzhuang/envs/omo_bi/python.exe docs/generate_docx_sec4.py)"
+    ]
+  }
+}
