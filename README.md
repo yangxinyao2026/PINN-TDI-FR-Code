@@ -23,17 +23,31 @@ share/
 │   ├── cases/
 │   │   ├── basic_cases.py       # Synthetic cases: polygon, ellipse, epigraph, nonconvex
 │   │   ├── TD_case.py           # Transmission + distribution system OPF models
-│   │   └── DS_case_3phase.py    # Three-phase unbalanced distribution system model
+│   │   ├── DS_case_3phase.py    # Three-phase unbalanced distribution system model
+│   │   └── fixed_module2.py     # Helper module for fixed boundary computation
 │   ├── runners/
 │   │   ├── main_polygon.py      # Run polygon case training
 │   │   ├── main_ellipse.py      # Run ellipse case training
 │   │   └── main_ds.py           # Run distribution system case training
 │   ├── draw_pictures/
-│   │   └── main_ds_plot.py      # Plot training error from saved data
+│   │   ├── main_ds_plot.py                        # Plot training error from saved data
+│   │   ├── Analytical_polygon_region.py            # Compute analytical polygon boundary (m=36 directions)
+│   │   ├── Analytical_polygon_region_plot.py       # Plot analytical polygon vs NN region comparison
+│   │   ├── Analytical_polygon_error.py             # Compute analytical polygon feasibility/optimality errors
+│   │   ├── Analytical_polygon_error_plot.py        # Plot NN vs analytical error comparison per case
+│   │   ├── Analytical_polygon_error_comparison_all_plot.py  # Cross-case box plots (m=8 vs m=36)
+│   │   ├── Box_error.py                           # Compute NN error under random parameter perturbations
+│   │   ├── Box_error_plot.py                      # Plot NN error distribution from Box_error data
+│   │   ├── dtheta_region_comparison.py            # Compute feasible regions under different Δθ perturbations
+│   │   └── dtheta_region_comparison_plot.py       # Plot multi-perturbation feasible region comparison (2×3)
 │   ├── testers/
-│   │   └── tst_TD.py            # T&D integrated case tests
+│   │   ├── tst_TD.py            # T&D integrated case tests
+│   │   ├── tst_polygon.py       # Polygon case: load & visualize pretrained/BiasNet/FullNet
+│   │   └── tst_ellipse.py       # Ellipse case: load & visualize pretrained/BiasNet/FullNet
 │   └── data/
-│       ├── TD_OPF/              # IEEE and custom test case data (.mat, .m)
+│       ├── TD_OPF/
+│       │   ├── ds_data/              # Distribution system case data (.mat, 24 files)
+│       │   └── full_data_mfile/      # MATLAB test case definitions (.m, 73 files)
 │       ├── profiles_data/       # Load/PV/Baseline profile data
 │       └── real_dis_data/       # Real distribution system measurement data
 └── results/                     # Trained model weights and figures
@@ -59,6 +73,26 @@ share/
 - **`ShapeDrawer_2D`** — Draws polygons, ellipses, epigraphs, and non-convex regions in 2D.
 - **`ShapeDrawer_3D`** — Visualizes the evolution of polyhedral approximations across training iterations as 3D prisms.
 - **`ErrorVisualizer`** — Box plots, violin plots, and KDE plots for error distribution analysis.
+
+### Analytical Comparison & Plotting (`draw_pictures/`)
+
+These scripts follow a **compute-then-plot** workflow: run the data computation script first, then run the corresponding plot script.
+
+| Script (computation) | Script (plotting) | Description |
+|---|---|---|
+| `Analytical_polygon_region.py` | `Analytical_polygon_region_plot.py` | Computes/visualizes analytical polygon boundaries using m=36 uniformly distributed directions, compared against NN approximations |
+| `Analytical_polygon_error.py` | `Analytical_polygon_error_plot.py` | Computes/plots feasibility and optimality error statistics comparing analytical polygon vs NN method for each case |
+| — | `Analytical_polygon_error_comparison_all_plot.py` | Cross-case box plots comparing analytical polygon errors at m=8 vs m=36 directions |
+| `Box_error.py` | `Box_error_plot.py` | Computes/plots trained NN error distributions under random parameter perturbations |
+| `dtheta_region_comparison.py` | `dtheta_region_comparison_plot.py` | Computes/plots feasible region evolution under 6 different Δθ perturbation levels (2×3 subplot layout) |
+
+### Testers (`testers/`)
+
+| Script | Description |
+|---|---|
+| `tst_TD.py` | T&D integrated case tests |
+| `tst_polygon.py` | Loads PreTrainNet/BiasNet/FullNet weights for polygon case and visualizes approximation results |
+| `tst_ellipse.py` | Loads PreTrainNet/BiasNet/FullNet weights for ellipse case and visualizes approximation results |
 
 ### Cases
 
@@ -121,6 +155,41 @@ The distribution system training follows a two-stage protocol:
 1. **Stage 1 (PreTrainNet):** Trains for ~2000 iterations to learn a baseline polyhedral approximation.
 2. **Stage 2 (FullNet):** Fine-tunes both `A` and `b` conditioned on load parameter perturbations, then optionally minimizes feasibility error with a smaller learning rate.
 
+### 5. Analytical Polygon Comparison
+
+Compute and visualize how the analytical polygon method compares against the NN approach:
+
+```bash
+# Step 1: Compute analytical polygon boundaries (run once per case)
+python Simulator/draw_pictures/Analytical_polygon_region.py
+# Step 2: Plot region comparison
+python Simulator/draw_pictures/Analytical_polygon_region_plot.py
+```
+
+### 6. Error Analysis & Comparison
+
+```bash
+# Compute NN error under random perturbations
+python Simulator/draw_pictures/Box_error.py
+python Simulator/draw_pictures/Box_error_plot.py
+
+# Compute analytical polygon errors
+python Simulator/draw_pictures/Analytical_polygon_error.py
+python Simulator/draw_pictures/Analytical_polygon_error_plot.py
+
+# Cross-case comparison box plots (m=8 vs m=36)
+python Simulator/draw_pictures/Analytical_polygon_error_comparison_all_plot.py
+```
+
+### 7. Parameter Perturbation Region Comparison
+
+Visualize how the feasible region changes under different Δθ perturbation levels:
+
+```bash
+python Simulator/draw_pictures/dtheta_region_comparison.py
+python Simulator/draw_pictures/dtheta_region_comparison_plot.py
+```
+
 ## Method
 
 Given an original feasible region `Ω(θ) = {x : g(x, θ) ≤ 0}` parameterized by `θ`, the method learns a polyhedral approximation `P(θ) = {x : A(θ)x ≤ b(θ)}` that minimizes:
@@ -132,7 +201,9 @@ The neural network is trained using gradient-based optimization with a custom lo
 
 ## Data
 
-- **`Simulator/data/TD_OPF/`** — Standard IEEE test case data in MATLAB format
+- **`Simulator/data/TD_OPF/ds_data/`** — 24 distribution system case data files (`.mat`)
+- **`Simulator/data/TD_OPF/full_data_mfile/`** — 73 MATLAB test case definitions (`.m`), including IEEE standard cases
+- **`Simulator/data/TD_OPF/`** — Transmission system and additional case data (`.mat`, `.m`)
 - **`Simulator/data/profiles_data/`** — Load and PV generation profiles
 - **`Simulator/data/real_dis_data/`** — Real measurement data from a 36-node three-phase distribution network
 
