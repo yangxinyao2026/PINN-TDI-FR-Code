@@ -99,10 +99,10 @@ record_errors = False  # 是否在训练过程中记录误差数据（设为Fals
 dscases = {
     # 'case10ba_ds': TD_case.case10ba_ds(),
     # 'case17me_ds': TD_case.case17me_ds(),
-    # 'case33bw_ds': TD_case.case33bw_ds(),
+     'case33bw_ds': TD_case.case33bw_ds(),
     # 'case51ga_ds': TD_case.case51ga_ds(),
     # 'case74_ds': TD_case.case74_ds(),
-     'case118zh_ds': TD_case.case118zh_ds(),
+    # 'case118zh_ds': TD_case.case118zh_ds(),
     # 'case136ma_ds': TD_case.case136ma_ds(),
     # 'case533mt_hi_ds': TD_case.case533mt_hi_ds(),
     # 'case36real_3phase_ds': DS_case_3phase.case36real_3phase_ds(),
@@ -111,7 +111,7 @@ dscases = {
 for casename, ppc in dscases.items():
     P_rated = sum(ppc['bus'][:,2])/ppc['baseMVA']
     #lr = 1e-1/P_rated
-    lr = 3e-4/P_rated  #fullnet
+    lr = 3e-5/P_rated  #fullnet
     rate_opt_feas = 0.6
 
     # 记录总开始时间
@@ -243,13 +243,13 @@ for casename, ppc in dscases.items():
         if record_errors:
             # 更新 offset，使 Phase 2 的横坐标从 Phase 1 末尾接续
             enhanced_callback.offset = (n_train * 4) * len(case['params']['dataloader'])
-        trainer.configure(lr=1e-4/P_rated)
+        trainer.configure(lr=1e-5/P_rated)
         trainer.configure(rate_opt_feas=1e-4)
         trainer.initialize()
         phase2_start = time.time()
         trainer.train(n_train=n_train * 2 , params_data=case['params'], parallel=parallel)
         phase2_end = time.time()
-        torch.save(model.state_dict(), f'{PROJECT_ROOT}\\results\\ds_proj_paper\\{casename}\\A(8,2)_type3(97, 107, 109, 80, 63, 31)_lr1(3e-4)_lr2(1e-4)_rate(1e-4)2\\{model_type}_weights_feasible.pth')
+        torch.save(model.state_dict(), f'{PROJECT_ROOT}\\results\\ds_proj_paper\\{casename}\\A(8,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)\\{model_type}_weights_feasible.pth')
 
         if not record_errors:
             phase1_duration = phase1_end - phase1_start

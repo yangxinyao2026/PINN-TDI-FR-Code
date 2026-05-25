@@ -633,7 +633,7 @@ def DScase_3phase_train(casedata, model_type='pretrainnet', plot_flag = True, to
             }
 
     dim = 2
-    num = 36
+    num = 8
     theta_num = np.linspace(0, 2 * np.pi, num, endpoint=False)
     A_hat = np.column_stack((np.cos(theta_num), np.sin(theta_num)))
     errorcalculator = ErrorCalculator(

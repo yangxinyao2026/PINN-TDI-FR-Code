@@ -117,10 +117,10 @@ if __name__ == '__main__':
     dscases = {
         # 'case10ba_ds': TD_case.case10ba_ds(),
         # 'case17me_ds': TD_case.case17me_ds(),
-        # 'case33bw_ds': TD_case.case33bw_ds(),
+         'case33bw_ds': TD_case.case33bw_ds(),
         # 'case51ga_ds': TD_case.case51ga_ds(),
         # 'case74_ds': TD_case.case74_ds(),
-         'case118zh_ds': TD_case.case118zh_ds(),
+        # 'case118zh_ds': TD_case.case118zh_ds(),
         # 'case136ma_ds': TD_case.case136ma_ds(),
         # 'case533mt_hi_ds': TD_case.case533mt_hi_ds(),
         # 'case36real_3phase_ds': DS_case_3phase.case36real_3phase_ds(),
@@ -131,7 +131,7 @@ if __name__ == '__main__':
             result_dir = f'{PROJECT_ROOT}\\results\\ds_proj_paper\\{casename}\\A(36,2)_type3(8, 11)_lr1(3e-4)_lr2(1e-4)_rate(1e-4)'
         else:
             result_dir = (f'{PROJECT_ROOT}\\results\\ds_proj_paper\\{casename}\\'
-                         'A(8,2)_type3(97, 107, 109, 80, 63, 31)_lr1(3e-4)_lr2(1e-4)_rate(1e-4)2')
+                         'A(8,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)')
         output_dir = f'{result_dir}\\figures\\comparison\\feasible\\contrast\\'
 
         # 读取并绘制可行域对比图

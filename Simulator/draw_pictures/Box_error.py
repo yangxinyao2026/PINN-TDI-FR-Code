@@ -48,7 +48,7 @@ N_DIRECTIONS = 360                # 计算边界点的方向数量
 def get_weights_dir(casename):
     """获取权重文件目录（单相默认路径）"""
     return (f"{PROJECT_ROOT}\\results\\ds_proj_paper\\{casename}\\"
-            "A(8,2)_type3(97, 107, 109, 80, 63, 31)_lr1(3e-4)_lr2(1e-4)_rate(1e-4)2")
+            "A(8,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)")
 
 
 def load_pretrained_weights(result_dir, A_shape):
@@ -293,10 +293,10 @@ if __name__ == '__main__':
     dscases = {
         # 'case10ba_ds': TD_case.case10ba_ds(),     # 为了能正常运行，打开 TD_case.py 文件，修改第174行
         # 'case17me_ds': TD_case.case17me_ds(),
-        # 'case33bw_ds': TD_case.case33bw_ds(),
+         'case33bw_ds': TD_case.case33bw_ds(),
         # 'case51ga_ds': TD_case.case51ga_ds(),
         # 'case74_ds': TD_case.case74_ds(),
-         'case118zh_ds': TD_case.case118zh_ds(),
+        # 'case118zh_ds': TD_case.case118zh_ds(),
         # 'case136ma_ds': TD_case.case136ma_ds(),
         # 'case533mt_hi_ds': TD_case.case533mt_hi_ds(),
         # 'case36real_3phase_ds': DS_case_3phase.case36real_3phase_ds(),
