@@ -1,6 +1,6 @@
 # PINN-TDI-Code
 
-Code and data for **Physics-Informed Neural Network-based Two-stage Decomposition Iteration (PINN-TDI)** — a method for approximating parametric feasible regions of power system optimization problems using neural networks.
+Code and data for **Physics-Informed Neural Network-based TDI flexibility region (PINN-TDI)** — a method for approximating parametric feasible regions of power system optimization problems using neural networks.
 
 ## Overview
 
