@@ -39,7 +39,8 @@ share/
 │   │   ├── Box_error.py                           # Compute NN error under random parameter perturbations
 │   │   ├── Box_error_plot.py                      # Plot NN error distribution from Box_error data
 │   │   ├── dtheta_region_comparison.py            # Compute feasible regions under different Δθ perturbations
-│   │   └── dtheta_region_comparison_plot.py       # Plot multi-perturbation feasible region comparison (2×3)
+│   │   ├── dtheta_region_comparison_plot.py       # Plot multi-perturbation feasible region comparison (2×3)
+│   │   └── approximate_polygon_coverage.py        # Compute ray-coverage metrics (analytical polygon vs NN)
 │   ├── testers/
 │   │   ├── tst_TD.py            # T&D integrated case tests
 │   │   ├── tst_polygon.py       # Polygon case: load & visualize pretrained/BiasNet/FullNet
@@ -85,6 +86,17 @@ These scripts follow a **compute-then-plot** workflow: run the data computation 
 | — | `Analytical_polygon_error_comparison_all_plot.py` | Cross-case box plots comparing analytical polygon errors at m=8 vs m=36 directions |
 | `Box_error.py` | `Box_error_plot.py` | Computes/plots trained NN error distributions under random parameter perturbations |
 | `dtheta_region_comparison.py` | `dtheta_region_comparison_plot.py` | Computes/plots feasible region evolution under 6 different Δθ perturbation levels (2×3 subplot layout) |
+| `approximate_polygon_coverage.py` | — | Computes ray-coverage metrics: from reference point x^ref, shoots rays along random directions v, computes k_max for original region / analytical polygon / learned region, outputs coverage = k_max_approx / k_max_orig |
+
+#### Reusable helpers in `Analytical_polygon_region.py`
+
+| Function | Description |
+|---|---|
+| `load_fullnet(result_dir, dim_theta, A_hat_shape)` | Loads FullNet weights once (returns `nn.Module` in eval mode) |
+| `fullnet_forward(fullnet, dtheta)` | FullNet inference with `torch.no_grad()`, returns `(A, b)` as NumPy arrays |
+| `calculate_original_boundary(error_calculator, n_directions)` | Computes original feasible region boundary by reusing an already-parameterized `ErrorCalculator` |
+| `compute_analytical_polygon(model, ...)` | Computes analytical polygon vertices via m-direction ray optimization |
+| `update_model_parameters(error_calculator, init_params_dict, dtheta)` | Updates Pd/Qd parameters on the error calculator's model |
 
 ### Testers (`testers/`)
 
@@ -189,6 +201,16 @@ Visualize how the feasible region changes under different Δθ perturbation leve
 python Simulator/draw_pictures/dtheta_region_comparison.py
 python Simulator/draw_pictures/dtheta_region_comparison_plot.py
 ```
+
+### 8. Coverage Metrics
+
+Compute ray-coverage metrics that measure how well the analytical polygon and NN approximations cover the original feasible region:
+
+```bash
+python Simulator/draw_pictures/approximate_polygon_coverage.py
+```
+
+Configure `dscases` and `m_values` at the bottom of the script. Results are saved as `coverage_data_m{m}.npz` in the results directory.
 
 ## Method
 

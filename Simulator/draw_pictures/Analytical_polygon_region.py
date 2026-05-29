@@ -27,7 +27,7 @@ import Simulator.cases.DS_case_3phase as DS_case_3phase
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # 解析多边形法的方向数（与NN方法面数一致）
-N_DIRECTIONS = 36
+N_DIRECTIONS = 8
 
 
 # =============================================================================
@@ -50,7 +50,7 @@ def update_model_parameters(error_calculator, init_params_dict, dtheta=None):
 def get_weights_dir(casename):
     """获取权重文件目录"""
     return (f"{PROJECT_ROOT}\\results\\ds_proj_paper\\{casename}\\"
-            "A(36,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)")
+            "A(8,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)")
 
 
 # =============================================================================
@@ -76,7 +76,7 @@ def compute_analytical_polygon(model, init_params_dict, dtheta=None, ppc=None,
         error_calc = error_calculator
 
     # 收紧 ipopt 容差，提高边界点精度
-    error_calc.solver.options['tol'] = 1e-12
+    error_calc.solver.options['tol'] = 1e-11
     error_calc.solver.options['max_iter'] = 10000
 
     # 更新模型参数
@@ -113,20 +113,14 @@ def compute_analytical_polygon(model, init_params_dict, dtheta=None, ppc=None,
 # Original region 计算
 # =============================================================================
 
-def calculate_original_boundary(model, n_directions=360):
-    """计算原始可行域边界（精度基准）"""
+def calculate_original_boundary(error_calculator, n_directions=360):
+    """计算原始可行域边界（精度基准），复用已更新参数的error_calculator"""
     theta = np.linspace(0, 2 * np.pi, n_directions, endpoint=False)
     directions = np.column_stack((np.cos(theta), np.sin(theta)))
 
-    error_calc = ErrorCalculator(
-        original_model={'model': model},
-        A_hat=np.zeros((n_directions, 2)),
-        solver='ipopt'
-    )
-
     boundary = np.zeros((n_directions, 2))
     for i in range(n_directions):
-        result = error_calc.optimize_direction(directions[i])
+        result = error_calculator.optimize_direction(directions[i])
         boundary[i] = result if result is not None else boundary[max(0, i-1)]
 
     return boundary
@@ -136,8 +130,8 @@ def calculate_original_boundary(model, n_directions=360):
 # FullNet 计算
 # =============================================================================
 
-def load_fullnet_weights(result_dir, dim_theta, dtheta, A_hat_shape):
-    """加载FullNet并计算A、b矩阵"""
+def load_fullnet(result_dir, dim_theta, A_hat_shape):
+    """加载FullNet权重（仅加载一次）"""
     pretrainnet = PreTrainNet(np.zeros(A_hat_shape), np.zeros(A_hat_shape[0]),
                               is_epigraph=False, device=device)
     pretrainnet.load_state_dict(
@@ -152,8 +146,14 @@ def load_fullnet_weights(result_dir, dim_theta, dtheta, A_hat_shape):
     fullnet.load_state_dict(
         torch.load(os.path.join(result_dir, 'fullnet_weights_feasible.pth'), map_location=device))
     fullnet = fullnet.to(device)
+    fullnet.eval()
+    return fullnet
 
-    A, b = fullnet(torch.tensor(dtheta, dtype=torch.float32).to(device))
+
+def fullnet_forward(fullnet, dtheta):
+    """FullNet前向传播，返回A、b矩阵"""
+    with torch.no_grad():
+        A, b = fullnet(torch.tensor(dtheta, dtype=torch.float32).to(device))
     return A[0].detach().cpu().numpy(), b[0].detach().cpu().numpy()
 
 
@@ -188,29 +188,31 @@ def compute_and_save_comparison(model, init_params_dict, dim_theta, result_dir,
                                             ppc=ppc, error_calculator=error_calculator,
                                             n_dirs=N_DIRECTIONS)
     ap_time = time.time() - t0
-    print(f"耗时: {ap_time:.2f} 秒")
+    print(f"耗时: {ap_time:.4f} 秒")
 
     # 方法2: Original region（仅作精度参考）
     print("\n--- Original region（精度参考）---")
     t0 = time.time()
-    original_boundary = calculate_original_boundary(model, n_directions=360)
+    original_boundary = calculate_original_boundary(error_calculator, n_directions=360)
     orig_time = time.time() - t0
-    print(f"耗时: {orig_time:.2f} 秒")
+    print(f"耗时: {orig_time:.4f} 秒")
 
     # 方法3: FullNet
     print("\n--- FullNet ---")
-    t0 = time.time()
+    print("加载模型权重...")
+    fullnet = load_fullnet(result_dir, dim_theta, A_hat_shape)
     dtheta_arr = np.zeros(dim_theta) if dtheta is None else np.asarray(dtheta)
-    A_pred, b_pred = load_fullnet_weights(result_dir, dim_theta, dtheta_arr, A_hat_shape)
+    t0 = time.time()
+    A_pred, b_pred = fullnet_forward(fullnet, dtheta_arr)
     fn_time = time.time() - t0
-    print(f"耗时: {fn_time:.2f} 秒")
+    print(f"前向传播耗时: {fn_time:.4f} 秒")
 
     # 时间统计
     print("\n" + "-" * 40)
     print("计算时间统计:")
-    print(f"  解析多边形法(m={N_DIRECTIONS}): {ap_time:.2f} 秒")
-    print(f"  original(360方向): {orig_time:.2f} 秒（仅参考）")
-    print(f"  fullnet: {fn_time:.2f} 秒")
+    print(f"  解析多边形法(m={N_DIRECTIONS}): {ap_time:.4f} 秒")
+    print(f"  original(360方向): {orig_time:.4f} 秒（仅参考）")
+    print(f"  fullnet: {fn_time:.4f} 秒")
 
     # 计算坐标范围
     bus_P = ppc['bus'][:, 2]
@@ -278,7 +280,7 @@ if __name__ == '__main__':
             A_hat_shape = case_full['A_hat'].shape
             result_dir = get_weights_dir(casename)
 
-        dtheta = np.zeros(dim_theta)
+        dtheta = np.full(dim_theta, 0)
 
         figure_folder = f'{result_dir}\\figures\\comparison\\feasible\\contrast\\'
 
