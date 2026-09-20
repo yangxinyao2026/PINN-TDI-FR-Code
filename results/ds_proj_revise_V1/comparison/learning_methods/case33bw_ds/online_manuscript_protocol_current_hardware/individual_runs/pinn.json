@@ -1,0 +1,32 @@
+{
+  "protocol_version": "r11_r16_manuscript_single_region_protocol_v4",
+  "method": "pinn",
+  "method_family": "PINN",
+  "online_seconds": 0.13524889945983887,
+  "online_milliseconds": 135.24889945983887,
+  "output_kind": "A_b",
+  "output_shapes": {
+    "A": [
+      1,
+      36,
+      2
+    ],
+    "b": [
+      1,
+      36
+    ]
+  },
+  "dim_theta": 66,
+  "device": "NVIDIA GeForce RTX 5080",
+  "torch_version": "2.12.0.dev20260411+cu130",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "hostname": "anonymized-host",
+  "source": ".\\results\\ds_proj_revise_V1\\comparison\\supervised\\case33bw_ds\\models\\pinn_retrained\\fullnet_weights_feasible.pth",
+  "model_loading_included": false,
+  "warmup_forward_calls": 0,
+  "untimed_pretrain_initialization_calls": 1,
+  "timed_online_calls": 1,
+  "timer": "time.time",
+  "timing_scope": "manuscript order: untimed PreTrainNet CUDA initialization, then first timed numpy-to-CUDA target-model forward and CPU numpy output; supervised methods additionally include CPU convex-hull construction"
+}

@@ -1,0 +1,51 @@
+{
+  "stage": "formal",
+  "shard_index_zero_based": 3,
+  "num_shards": 10,
+  "scenario_indices": [
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "scenario_count": 5,
+  "complete": true,
+  "training_config": {
+    "method_version": "paper_2d_kkt_v9_validated_cumulative_timing",
+    "stage": "formal",
+    "n_sides": 36,
+    "initial_points": 10000,
+    "update_rounds": 50,
+    "update_points_per_route": 10,
+    "update_protocol": "validated_misclassification_with_convergence_v1",
+    "duplicates_retained": true,
+    "duplicate_point_tolerance": 1e-08,
+    "max_update_candidate_attempts_per_route": 100,
+    "beta_fraction": 0.01,
+    "kkt_complementarity_tolerance": 1e-06,
+    "kkt_relaxation_schedule": [
+      0.001,
+      0.0001,
+      1e-05,
+      1e-06,
+      0.0
+    ],
+    "max_learning_steps": 2500,
+    "learning_rate": 0.0003,
+    "learning_loss": "paper_equation_15_global_mean_hinge_v1",
+    "score_scale_bounds": [
+      0.001,
+      10000.0
+    ],
+    "sampling_expansion_factor": 1.4,
+    "initial_sampling": "uniform_candidates_exact_class_balance_v5_timed",
+    "cumulative_offline_timing": "checkpoint_safe_v1",
+    "reuse_legacy_initial_labels": false,
+    "initial_feasible_target": 5000,
+    "initial_infeasible_target": 5000,
+    "feasibility_slack_tol": 1e-07,
+    "polytope_classification_tol": 1e-07,
+    "seed": 42
+  }
+}

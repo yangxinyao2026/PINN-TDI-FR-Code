@@ -1,0 +1,4 @@
+﻿experiment_version,ds_case,n_dso,region,attempted_scenarios,optimal_scenarios,mean_solve_time_s,median_solve_time_s,std_solve_time_s,min_solve_time_s,p95_solve_time_s,max_solve_time_s,timing_scope
+v4,case36real_3phase_ds,27,base,5,5,1.013433339999756,1.0184533999999985,0.01896089136512479,0.9840631000115536,1.0341196799883619,1.0353305999888107,solver.solve wall-clock only
+v4,case36real_3phase_ds,27,pinn,5,5,1.2467883000033908,1.2449205000011716,0.015622851345578366,1.2283888000238221,1.2695524199865758,1.2748039999860339,solver.solve wall-clock only
+v4,case36real_3phase_ds,27,true,5,5,61.90126663999981,56.850393100001384,11.968161118943023,47.95489120000275,79.48580380001222,82.74071450001793,solver.solve wall-clock only

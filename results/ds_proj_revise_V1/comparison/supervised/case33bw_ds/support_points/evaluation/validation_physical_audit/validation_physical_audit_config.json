@@ -1,0 +1,20 @@
+{
+  "case": "case33bw_ds",
+  "label_method": "support_points",
+  "label_sizes": [
+    50,
+    100,
+    200,
+    500,
+    1000,
+    2000,
+    5000
+  ],
+  "validation_conditions": 50,
+  "error_directions_per_condition": 10,
+  "coverage_directions_per_condition": 100,
+  "checkpoint_selection_metric": "validation_label_total_mse",
+  "physical_audit_used_for_selection": false,
+  "test_set_used": false,
+  "note": "Physical region metrics are computed only after the label-MSE checkpoint has been fixed."
+}

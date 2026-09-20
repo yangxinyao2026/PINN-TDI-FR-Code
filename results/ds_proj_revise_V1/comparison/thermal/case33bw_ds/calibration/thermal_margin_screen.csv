@@ -1,0 +1,8 @@
+﻿current_margin,n_dtheta,n_directions,reference_pf_success_rate,reference_thermal_feasible_rate,direction_screen_performed,direction_solve_success_rate,all_directions_success_condition_rate,direction_with_any_line_ge99_ratio,direction_max_utilization_p95,direction_max_utilization_max,accepted,elapsed_seconds
+1.1,50,8,1.0,0.36,False,0.0,0.0,0.0,nan,nan,False,0.020309925079345703
+1.15,50,8,1.0,0.76,False,0.0,0.0,0.0,nan,nan,False,0.02035832405090332
+1.2,50,8,1.0,1.0,True,1.0,1.0,0.515,1.0000349043102514,1.000056096161546,True,42.4395649433136
+1.25,50,8,1.0,1.0,True,1.0,1.0,0.49,1.0000274380939316,1.0000323637280162,True,42.369779109954834
+1.3,50,8,1.0,1.0,True,1.0,1.0,0.4475,1.0000297380997183,1.0000299203431977,True,42.21177339553833
+1.4,50,8,1.0,1.0,True,1.0,1.0,0.28,1.0000256144756219,1.000025771810403,True,43.63745617866516
+1.5,50,8,1.0,1.0,True,1.0,1.0,0.0825,1.000000044161578,1.0000224464363958,True,39.497496128082275

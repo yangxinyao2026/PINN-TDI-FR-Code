@@ -1,0 +1,31 @@
+{
+  "protocol_version": "r11_r16_manuscript_single_region_protocol_v4",
+  "method": "supervised_n5000",
+  "method_family": "supervised_boundary_point_network",
+  "online_seconds": 0.13489818572998047,
+  "online_milliseconds": 134.89818572998047,
+  "output_kind": "support_points_convex_hull",
+  "output_shapes": {
+    "predicted_support_points": [
+      36,
+      2
+    ],
+    "convex_hull_vertices": [
+      36,
+      2
+    ]
+  },
+  "dim_theta": 66,
+  "device": "NVIDIA GeForce RTX 5080",
+  "torch_version": "2.12.0.dev20260411+cu130",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "hostname": "anonymized-host",
+  "source": ".\\results\\ds_proj_revise_V1\\comparison\\supervised\\case33bw_ds\\support_points\\models\\n5000\\supervised_fullnet_weights.pth",
+  "model_loading_included": false,
+  "warmup_forward_calls": 0,
+  "untimed_pretrain_initialization_calls": 1,
+  "timed_online_calls": 1,
+  "timer": "time.time",
+  "timing_scope": "manuscript order: untimed PreTrainNet CUDA initialization, then first timed numpy-to-CUDA target-model forward and CPU numpy output; supervised methods additionally include CPU convex-hull construction"
+}

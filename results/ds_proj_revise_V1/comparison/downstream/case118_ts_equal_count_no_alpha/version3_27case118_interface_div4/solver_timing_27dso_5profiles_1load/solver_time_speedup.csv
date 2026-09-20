@@ -1,0 +1,2 @@
+﻿experiment_version,ds_case,n_dso,paired_optimal_scenarios,mean_pinn_solve_time_s,mean_true_solve_time_s,ratio_of_mean_times_true_over_pinn,median_paired_speedup_true_over_pinn,timing_scope
+v3,case118zh_ds,27,5,1.132794540002942,22.493829700001516,19.85693689867458,21.309896825462086,solver.solve wall-clock only

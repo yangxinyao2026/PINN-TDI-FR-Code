@@ -1,0 +1,57 @@
+{
+  "interpretation": "Empirical sampled validation, not a proof over every dtheta. SAFE means every tested direction agreed with the 0.001-p.u. baseline within agreement_tolerance_pu.",
+  "settings": {
+    "cases": [
+      "case33",
+      "case36"
+    ],
+    "n_random": 2,
+    "n_directions": 36,
+    "fine_step": 0.001,
+    "case33_step": 0.03,
+    "case36_step": 0.002,
+    "agreement_tol": 0.0001,
+    "bisection_tol": 1e-06,
+    "feasibility_distance_tol": 1e-05,
+    "max_radius": 10.0,
+    "dtheta_low": -0.5,
+    "dtheta_high": 0.5,
+    "max_random_attempts": 50,
+    "seed": 42,
+    "output_dir": ".\\results\\ds_proj_revise_V1\\comparison\\supervised\\radial_scan_step_validation"
+  },
+  "cases": [
+    {
+      "case": "case33bw_ds",
+      "tested_scenarios": 3,
+      "tested_directions": 108,
+      "candidate_step_pu": 0.03,
+      "rejected_reference_candidates": 0,
+      "elapsed_seconds": 1622.7557239999878,
+      "fine_step_pu": 0.001,
+      "agreement_tolerance_pu": 0.0001,
+      "max_radial_error_pu": 8.544921875214273e-07,
+      "mean_radial_error_pu": 3.39084201389223e-07,
+      "fine_solver_calls": 10944,
+      "candidate_solver_calls": 2005,
+      "solver_call_reduction_fraction": 0.8167945906432749,
+      "verdict": "SAFE_ON_TESTED_SCENARIOS"
+    },
+    {
+      "case": "case36real_3phase_ds",
+      "tested_scenarios": 3,
+      "tested_directions": 108,
+      "candidate_step_pu": 0.002,
+      "rejected_reference_candidates": 0,
+      "elapsed_seconds": 16908.88214969996,
+      "fine_step_pu": 0.001,
+      "agreement_tolerance_pu": 0.0001,
+      "max_radial_error_pu": 2.7755575615628914e-17,
+      "mean_radial_error_pu": 2.569960705150825e-19,
+      "fine_solver_calls": 34191,
+      "candidate_solver_calls": 17771,
+      "solver_call_reduction_fraction": 0.4802433388903513,
+      "verdict": "SAFE_ON_TESTED_SCENARIOS"
+    }
+  ]
+}

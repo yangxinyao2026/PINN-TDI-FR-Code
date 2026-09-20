@@ -1,0 +1,15 @@
+{
+  "source": "EPSR-D-26-06663.pdf, Table 1 and Section 4.1",
+  "server_relation": "current server; original-manuscript experiment server",
+  "manuscript_note": "submitted hardware statement should be corrected; RTX 5080 belongs to the other revision server",
+  "protocol": "original_manuscript_single_complete_region_timing",
+  "cpu": "Intel Core i9-12900H",
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "optimization_device": "CPU (IPOPT)",
+  "pinn_device": "GPU",
+  "reported_polygon_facets": [
+    8,
+    36
+  ],
+  "amortization_polygon_facets": 36
+}

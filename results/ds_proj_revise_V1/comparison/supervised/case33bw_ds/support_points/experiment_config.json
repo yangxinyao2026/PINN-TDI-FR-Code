@@ -1,0 +1,48 @@
+{
+  "case": "case33bw_ds",
+  "n_sides": 36,
+  "label_sizes": [
+    50,
+    100,
+    200,
+    500,
+    1000,
+    2000,
+    5000
+  ],
+  "batch_size": 5,
+  "min_optimizer_steps": 0,
+  "max_optimizer_steps": 10000,
+  "validation_interval": 50,
+  "early_stopping_patience": 20,
+  "relative_improvement_tolerance": 0.0001,
+  "absolute_improvement_tolerance": 1e-10,
+  "checkpoint_selection_metric": "validation_label_total_mse",
+  "physical_audit_used_for_selection": false,
+  "learning_rate": 0.001,
+  "device": "cuda",
+  "machine_signature": {
+    "cuda_device": "NVIDIA GeForce RTX 5080",
+    "hostname": "anonymized-host",
+    "platform": "Windows-11-10.0.22631-SP0",
+    "processor": "Intel64 Family 6 Model 85 Stepping 7, GenuineIntel",
+    "torch_version": "2.12.0.dev20260411+cu130"
+  },
+  "label_method": "support_points",
+  "label_definition": "36 ordered support points argmax d_i^T(P,Q) on the original AC feasible domain; network directly predicts their coordinates",
+  "support_label_cache_method": "support_points_v1_argmax_36_unit_directions",
+  "support_cache_schema_version": 3,
+  "support_cache_signature": "{\"direction_normalization\":\"unit_euclidean_norm\",\"method\":\"support_points_v1_argmax_36_unit_directions\",\"n_sides\":36,\"objective\":\"argmax_direction_dot_PQ\",\"physical_domain\":\"original_ac_model\",\"schema_version\":3,\"solver_call\":\"ErrorCalculator.optimize_direction(-direction)\"}",
+  "support_point_search": {
+    "direction_normalization": "unit Euclidean norm",
+    "objective": "argmax direction^T [P,Q]",
+    "implementation": "ErrorCalculator.optimize_direction(-direction, in_approx=False)",
+    "physical_domain": "original AC feasible domain"
+  },
+  "predicted_region_construction": "compute the convex hull of the 36 predicted support points; connect retained hull vertices in counter-clockwise hull order",
+  "label_mse_uses_raw_ordered_points": true,
+  "physical_evaluation_uses_convex_hull": true,
+  "optimality_definition": "geometric projection error, not objective regret",
+  "online_timing_source": ".\\results\\ds_proj_revise_V1\\comparison\\learning_methods\\case33bw_ds\\online_manuscript_protocol_current_hardware\\online_manuscript_protocol_times.csv",
+  "online_timing_protocol": "manuscript order; independent process; model loading and PreTrainNet initialization excluded; target network not warmed; one first complete region output"
+}

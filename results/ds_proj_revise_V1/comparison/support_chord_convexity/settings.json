@@ -1,0 +1,38 @@
+{
+  "case": null,
+  "quick": false,
+  "n_conditions": 10,
+  "n_directions": 360,
+  "random_chords": 500,
+  "edge_lambdas": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "random_lambdas": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "requested_cases": [
+    "case33bw_ds",
+    "case118zh_ds",
+    "case533mt_hi_ds"
+  ],
+  "selected_cases": [
+    "case33bw_ds",
+    "case118zh_ds",
+    "case533mt_hi_ds",
+    "case36real_3phase_ds"
+  ],
+  "output_dir": ".\\results\\ds_proj_revise_V1\\comparison\\support_chord_convexity",
+  "method": "single_projection_near_convexity_v1",
+  "distance_definition": "raw Euclidean distance to returned AC-feasible projection",
+  "normalization": "condition support-hull diameter"
+}

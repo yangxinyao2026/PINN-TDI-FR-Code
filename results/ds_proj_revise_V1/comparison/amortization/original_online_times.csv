@@ -1,0 +1,9 @@
+case,m,vertex_generation_s,pinn_gpu_s
+case33bw_ds,8,0.4,0.03
+case33bw_ds,36,1.78,0.028
+case118zh_ds,8,0.79,0.03
+case118zh_ds,36,3.43,0.029
+case533mt_hi_ds,8,4.61,0.031
+case533mt_hi_ds,36,22.6,0.028
+case36real_3phase_ds,8,1.18,0.031
+case36real_3phase_ds,36,5.22,0.028

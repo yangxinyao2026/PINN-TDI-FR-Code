@@ -1,0 +1,77 @@
+{
+  "created_local_time": "2026-09-02 20:57:05",
+  "python_executable": "python",
+  "python_version": "3.13.5",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "torch_version": "2.12.0.dev20260411+cu130",
+  "cuda_available": true,
+  "cuda_device": "NVIDIA GeForce RTX 5080",
+  "ipopt_executable": "ipopt",
+  "ipopt_version": "Ipopt 3.14.19 (Windows AMD64), ASL(20231111)",
+  "ts_case": "case118_ts",
+  "ds_case": "case33bw_ds",
+  "ts_model_version": "standard_ac_ybus_original_q_slack_v_2026_09",
+  "ts_bus_count": 118,
+  "ts_branch_count": 186,
+  "ts_generator_count": 54,
+  "positive_rate_a_branches": 0,
+  "pcc_voltage_pu": 1.0,
+  "pcc_indices_zero_based": [
+    59,
+    77,
+    10,
+    81,
+    44,
+    94,
+    78,
+    87,
+    74,
+    105
+  ],
+  "pcc_bus_numbers": [
+    60,
+    78,
+    11,
+    82,
+    45,
+    95,
+    79,
+    88,
+    75,
+    106
+  ],
+  "n_dso": 10,
+  "formal_tso_load_factors": [
+    0.9,
+    1.0,
+    1.05
+  ],
+  "formal_coverage_percentiles": [
+    10,
+    30,
+    50,
+    70,
+    90
+  ],
+  "multistart_count": 5,
+  "representative_multistart": [
+    {
+      "profile": "target_P10",
+      "ts_load_factor": 0.9
+    },
+    {
+      "profile": "target_P50",
+      "ts_load_factor": 1.0
+    },
+    {
+      "profile": "target_P90",
+      "ts_load_factor": 1.05
+    }
+  ],
+  "pretrain_weights": ".\\results\\ds_proj_paper\\case33bw_ds\\A(36,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)\\pretrainnet_weights.pth",
+  "pretrain_weights_sha256": "5d96137e57319beb4e3746b1740de83b51ad0b1f43198f980dd7b5b5bc0cfb32",
+  "fullnet_weights": ".\\results\\ds_proj_paper\\case33bw_ds\\A(36,2)_type3(2,29)_lr1(3e-5)_lr2(1e-5)_rate(1e-4)\\fullnet_weights_feasible.pth",
+  "fullnet_weights_sha256": "24c97696a9a49c855b6e48c698c82ab5800dd07810f7b3401cf6946e37ac2442",
+  "coverage_condition_source": ".\\results\\ds_proj_revise_V1\\comparison\\downstream\\case4gs_ts_case33bw_ds\\operating_grid_random_dtheta",
+  "timing_scope": "solver.solve only; excludes model construction, PINN inference, data loading, and DSO disaggregation"
+}

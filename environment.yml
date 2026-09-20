@@ -1,0 +1,21 @@
+name: pinn-tdi-fr
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.13.5
+  - pip
+  - ipopt=3.14.19
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - pillow
+  - psutil
+  - pyomo
+  - sympy
+  - pip:
+      - gurobipy
+      - pypower
+      - torch

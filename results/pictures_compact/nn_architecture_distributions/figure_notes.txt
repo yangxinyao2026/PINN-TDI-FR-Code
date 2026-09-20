@@ -1,0 +1,11 @@
+I. Implementation details to describe in the manuscript
+
+Six network configurations are compared on the 33-bus system: one hidden layer [128] and two hidden layers [128, 128], each paired with ReLU, Tanh, or SiLU. Networks A and b use the same hidden-layer configuration and activation function. All configurations share the pretrained initial mapping and use the same training data, loss functions, two-stage training budgets, and learning-rate settings. The training random seed is 0.
+
+The six trained models are evaluated on the same 20 operating conditions and 36 uniformly spaced directions, yielding 720 observations per configuration. The first condition is nominal; the remaining conditions are sampled from the normalized perturbation range [-0.5, 0.5]. The evaluation random seed is 42, and all configurations share the same true boundaries and reference points. Feasibility error is the squared Euclidean distance. Coverage is the ratio of radial boundary distances from the same reference point, k_P/k_Ω, rather than an area-coverage measure. All observations in this experiment are valid.
+
+Only one model is trained for each configuration. The comparison therefore characterizes architecture sensitivity under the present controlled experiment and does not establish statistical significance across random initializations.
+
+II. Caption guidance
+
+Distributions of feasibility error and coverage for six neural-network architectures. Horizontal-axis labels identify the activation function and the number of neurons in each hidden layer. Light blue denotes one hidden layer [128], and light green denotes two hidden layers [128, 128]. Each configuration contains 720 condition–direction observations (20 conditions × 36 directions). Boxes span the 25th–75th percentiles, orange lines mark medians, and whiskers extend to the most extreme observations within 1.5 interquartile ranges. Scatter points show all valid observations, including outliers; horizontal jitter is used only to separate overlapping points. Feasibility error uses a logarithmic vertical axis and lower values are better. Coverage uses a percentage axis, where 100% means that the predicted and true radial boundary distances coincide.

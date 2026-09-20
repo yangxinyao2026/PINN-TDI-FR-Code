@@ -1,0 +1,18 @@
+{
+  "scenario": 35,
+  "sampling_expansion_factor": 1.4,
+  "target_total": 10000,
+  "forced_class_balance": true,
+  "accepted_feasible": 5000,
+  "accepted_infeasible": 5000,
+  "attempts": 11796,
+  "classified_candidates": 11796,
+  "candidate_feasible": 6796,
+  "candidate_infeasible": 5000,
+  "candidate_feasible_rate": 0.576127500847745,
+  "candidate_infeasible_rate": 0.423872499152255,
+  "solver_failures": 0,
+  "class_scarcity_threshold": 0.3,
+  "recommendation": "class supply is adequate: keep current factor 1.4",
+  "automatic_factor_change": false
+}

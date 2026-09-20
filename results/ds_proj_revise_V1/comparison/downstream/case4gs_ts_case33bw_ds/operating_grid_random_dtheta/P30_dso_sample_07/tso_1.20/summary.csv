@@ -1,0 +1,4 @@
+﻿region,success,feasible_solution,optimization_success,termination,cost,candidate_cost,solve_time_s,pcc_p_pu_dsbase,pcc_q_pu_dsbase,max_tso_branch_utilization_percent,tso_branch_ge99_utilization_ratio_percent,pinn_disaggregation_squared_error,pinn_disaggregation_feasible,pinn_disaggregation_optimization_success,pinn_disaggregation_termination
+base,True,True,True,optimal,19614.50103973331,19614.50103973331,0.060120899928733706,0.4054068940469051,0.23137111163946145,98.59977874143821,0.0,nan,False,False,
+pinn,True,True,True,optimal,19572.59681200823,19572.59681200823,0.06173519999720156,0.30866197234631754,0.17325902025191314,98.68394289014007,0.0,4.736814954036557e-11,True,True,optimal
+true,True,True,True,optimal,19570.155911339636,19570.155911339636,0.3058581999503076,0.30284063171744247,0.17510445497966426,98.68835534327476,0.0,nan,False,False,

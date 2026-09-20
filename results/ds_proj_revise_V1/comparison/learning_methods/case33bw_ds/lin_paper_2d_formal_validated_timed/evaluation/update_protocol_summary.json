@@ -1,0 +1,26 @@
+{
+  "method_version": "paper_2d_kkt_v10_physical_sequence_stop",
+  "summary": {
+    "update_points_maximum_if_both_routes_active": 50000,
+    "update_points_actual": 39152,
+    "update_feasible_points": 18440,
+    "update_infeasible_points": 20712,
+    "over_duplicate_points": 3343,
+    "under_duplicate_points": 263,
+    "over_candidate_attempts": 33972,
+    "under_candidate_attempts": 19096,
+    "over_label_mismatches": 13235,
+    "under_label_mismatches": 0,
+    "over_prediction_mismatches": 0,
+    "under_prediction_mismatches": 0,
+    "over_label_solver_failures": 0,
+    "under_label_solver_failures": 0,
+    "over_converged_rounds": 428,
+    "over_physical_boundary_stopped_rounds": 1,
+    "under_converged_rounds": 656,
+    "update_round_processing_seconds": 121250.98247100021
+  },
+  "scenario_count": 50,
+  "round_record_count": 2500,
+  "detail_source": "models/scenario_*/result.npz:update_metadata_json"
+}

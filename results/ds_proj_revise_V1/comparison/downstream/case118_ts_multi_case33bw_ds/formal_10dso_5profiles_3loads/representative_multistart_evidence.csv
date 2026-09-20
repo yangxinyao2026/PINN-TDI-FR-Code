@@ -1,0 +1,2 @@
+﻿multistart_scenarios,multistart_count_per_model,multistart_total_solves,multistart_optimal_solve_ratio_percent,multistart_cost_order_success_ratio_percent,multistart_max_relative_cost_spread_percent
+3,5,45,100.0,100.0,4.4769836275062145e-09

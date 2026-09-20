@@ -1,0 +1,14 @@
+I. Manuscript implementation details
+
+The nominal operating condition (dtheta=0) of the 33-bus system is used. The PINN trained on the base topology is fixed and is not retrained; the Base and T1–T5 reconfigured topologies are compared. The saved minimization support values in 36 directions define a half-space intersection that represents a finite-direction support envelope of the true region. This avoids incorrectly marking gaps created by chords between support points as exceedances. The PINN region is reconstructed from its linear inequalities, and red regions are computed by polygon differences. The absence of red shading does not prove that no exceedance exists, because very small exceedances may not be resolved by the sampled directions.
+
+II. Caption
+
+Gray dashed boundaries and light-gray fill show the base-topology support envelope. Blue boundaries and light-blue fill show the fixed PINN region. All green boundaries represent changed topologies without distinguishing their individual types. Red hatching marks the portion of the PINN region that exceeds at least one changed-topology envelope, i.e., the union of the individual exceedance regions. The exterior inset on the right enlarges a local exceedance region.
+
+Topology operations (close tie line; open original branch):
+T1: [21, 8]; [7, 8]
+T2: [9, 15]; [14, 15]
+T3: [12, 22]; [21, 22]
+T4: [18, 33]; [17, 18]
+T5: [25, 29]; [28, 29]

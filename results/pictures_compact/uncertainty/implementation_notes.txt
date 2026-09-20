@@ -1,0 +1,11 @@
+I. Implementation details to describe in the manuscript
+
+The case33bw_ds test system and the model trained for the original manuscript are used. Independent multiplicative Gaussian noise with standard deviations of 0%, 1%, 3%, 5%, and 10% is applied to active- and reactive-load measurements. The network receives the noisy input without clipping, while the true feasible region is determined from the noise-free parameters.
+
+The test contains 50 true operating conditions, three noise realizations per condition, and 10 directions per realization. Conditions, standardized noise samples, and directions are reused across noise levels. The random seed is 42.
+
+The error ratio is 100√[e/(P_ref²+Q_ref²)]%, where e is the squared projection distance and the reference power is the root-bus operating point for each true condition. Optimality refers to the geometric projection error.
+
+II. Caption guidance
+
+Distributions of square-root feasibility and optimality error ratios at different measurement-noise levels. Each noise level contains 1,500 directional observations, and only successfully solved records are plotted. Boxes span the 25th–75th percentiles, horizontal lines inside the boxes mark medians, whiskers extend to the most extreme observations within 1.5 interquartile ranges, and scatter points show individual observations. Black open circles connected by lines mark the maximum observation in each group. The feasibility plot uses a logarithmic vertical axis, whereas the optimality plot uses a linear vertical axis.

@@ -1,0 +1,5 @@
+﻿experiment_version,ds_case,n_dso,paired_optimal_scenarios,mean_pinn_solve_time_s,mean_true_solve_time_s,ratio_of_mean_times_true_over_pinn,median_paired_speedup_true_over_pinn,timing_scope
+v1,case33bw_ds,27,5,1.2440137600002346,4.800903399992967,3.859204419083002,3.5971008885217017,solver.solve wall-clock only
+v2,case533mt_hi_ds,27,5,1.1333416799956466,579.3423637600033,511.18067391841504,611.9075589573952,solver.solve wall-clock only
+v3,case118zh_ds,27,5,1.132794540002942,22.493829700001516,19.85693689867458,21.309896825462086,solver.solve wall-clock only
+v4,case36real_3phase_ds,27,5,1.2467883000033908,61.90126663999981,49.64857838321988,44.59539905791338,solver.solve wall-clock only

@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+.vscode/
+
+*.log
+.DS_Store
+Thumbs.db
+
+# Regenerable or local-only experiment artifacts.
+**/training_state.npz
+**/pretrain_process/
+**/pilot/
+**/*_before_reference_normalization.*
+**/update_protocol_audit.json
+
+# Raw operational data must never be committed.
+Simulator/data/real_dis_data/

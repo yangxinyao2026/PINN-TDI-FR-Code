@@ -1,0 +1,4 @@
+recommended_margin=1.2
+criteria: reference PF success=100%, reference thermal feasible=100%, direction success>=99.500%, directions with any line utilization>=99% >0
+next_command:
+python -m Simulator.runners.main_revise1_3_thermal --scenario thermal --stage all --margin 1.2
